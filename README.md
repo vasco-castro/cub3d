@@ -62,6 +62,7 @@ NO ./path/to/north_texture.png
 SO ./path/to/south_texture.png
 WE ./path/to/west_texture.png
 EA ./path/to/east_texture.png
+
 F 220,100,0
 C 225,30,0
 
@@ -75,19 +76,19 @@ C 225,30,0
 
 ```text
 cub3d/
-├── Makefile
-├── src/
+├── includes/
+│   └── cub3d.h
+├── srcs/
 │   ├── main.c
 │   ├── parsing/
 │   ├── rendering/
 │   ├── utils/
 │   └── ...
-├── include/
-│   └── cub3d.h
 ├── maps/
-│   └── map.cub
-└── textures/
-    └── *.png
+│   └── *.cub
+├── textures/
+│   └── *.xpm
+└── Makefile
 ```
 
 ## Bonus Features (Optional)
@@ -103,5 +104,5 @@ cub3d/
 This project follows the 42 School C coding standard (norminette). All code must comply with:
 
 ```bash
-norminette src/ include/
+norminette srcs/ includes/
 ```
