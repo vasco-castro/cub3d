@@ -7,7 +7,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	@echo "$(GREEN)Building $(NAME).$(RESET)"
-	@$(CC) $(OBJS) $(LIBFT) $(LIBFT_FLAGS) $(MLX) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBFT_FLAGS) $(MLX) $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	@echo "$(YELLOW)Cleaning objects.$(RESET)"

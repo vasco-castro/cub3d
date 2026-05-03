@@ -1,5 +1,5 @@
 
-#include "../libs/libft/include/libft.h"
+#include "libs/libft/libft.h"
 
 void	clean_exit(void)
 {

@@ -1,17 +1,18 @@
 
-CC	?= cc -Wall -Wextra -Werror
+CC			?= cc -Wall -Wextra -Werror
 
 # Directories
-SRCS_DIR	:= ./srcs
-INCS_DIR	:= ./includes
-LIBS_DIR	:= ./libs
+SRCS_DIR	:= srcs/
+INCS_DIR	:= includes/
+LIBS_DIR	:= libs/
+
+CFLAGS		:= -I./ -I$(INCS_DIR)
 
 # Source files (with directories applied)
-SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR)/, main ))
+SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main ))
 
 # Object files convertion
-OBJS 		:= $(SRCS:.c=.o)
-OBJS 		:= $(addprefix $(OBJS_DIR), $(OBJS))
+OBJS 		:= $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(dir $@)
@@ -21,25 +22,27 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 -include $(OBJS:.o=.d)
 
 # LIBFT linking and compilation flags
-LIBFT_DIR	:= $(LIBS_DIR)/libft
-LIBFT		:= $(LIBFT_DIR)/libft.a
+LIBFT_DIR	:= $(LIBS_DIR)libft/
+LIBFT		:= $(LIBFT_DIR)libft.a
 LIBFT_FLAGS	:= -L$(LIBFT_DIR) -lft
 
-$(LIBFT_DIR)/.git:
+$(LIBFT_DIR).git:
 	@git submodule update --init --quiet $(LIBFT_DIR)
 
-$(LIBFT): $(LIBFT_DIR)/.git
+$(LIBFT): $(LIBFT_DIR).git
 	@printf "$(GREEN)Building LIBFT.$(RESET)\n"
 	@make -sC $(LIBFT_DIR) > /dev/null 2> /dev/null
 
 # MLX Linking and Compilation Flags
-MLX_DIR		:= $(LIBS_DIR)/minilibx
-MLX			:= $(MLX_DIR)/libmlx.a
+MLX_DIR		:= $(LIBS_DIR)minilibx/
+MLX			:= $(MLX_DIR)libmlx.a
 MLX_FLAGS	:= -L$(MLX_DIR) -lmlx -lXext -lX11
 
-$(MLX_DIR)/.git:
+$(MLX_DIR).git:
 	@git submodule update --init --quiet $(MLX_DIR)
 
-$(MLX): $(MLX_DIR)/.git
+$(MLX): $(MLX_DIR).git
 	@printf "$(GREEN)Building MLX.$(RESET)\n"
 	@make -sC $(MLX_DIR) > /dev/null 2> /dev/null
+
+CFLAGS		+= -I$(LIBFT_DIR) -I$(MLX_DIR)
