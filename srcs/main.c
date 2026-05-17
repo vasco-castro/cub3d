@@ -31,8 +31,8 @@ static void	game_init(void)
 	// load sprites
 	// initialize player position and direction
 	mlx_hook(game()->win, 4, 0, mouse_handler, &game);
-	mlx_hook(game()->win, 2, 1, key_handler, &game);
-	mlx_hook(game()->win, 17, 1, close_window, &game);
+	mlx_hook(game()->win, 2, 0, key_handler, &game);
+	mlx_hook(game()->win, 17, 0, close_window, &game);
 	mlx_loop(game()->mlx);
 }
 

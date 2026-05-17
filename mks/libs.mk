@@ -20,17 +20,17 @@ ifeq ($(UNAME_S),Linux)
 	MLX_DIR		:= $(LIBS_DIR)minilibx-linux/
 	MLX			:= $(MLX_DIR)libmlx.a
 	MLX_FLAGS	:= -L$(MLX_DIR) -lmlx -lXext -lX11
+	CFLAGS		+= -I$(MLX_DIR) -I/usr/include
 else ifeq ($(UNAME_S),Darwin)
 	MLX_DIR		:= $(LIBS_DIR)minilibx-opengl/
 	MLX			:= $(MLX_DIR)libmlx.a
-	MLX_FLAGS	:= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+	MLX_FLAGS	:= -L$(MLX_DIR) -lmlx -Wl,-ObjC -framework OpenGL -framework AppKit -framework Cocoa
+	CFLAGS		+= -I$(MLX_DIR) -DGL_SILENCE_DEPRECATION -Dmlx_destroy_display\(mlx_ptr\)=\(\(void\)\(mlx_ptr\),0\)
+	MLX_MAKE_VARS := CC=clang
 endif
-
-CFLAGS			+= -I$(MLX_DIR)
-
 $(MLX_DIR).git:
 	@git submodule update --init --quiet $(MLX_DIR)
 
 $(MLX): $(MLX_DIR).git
 	@printf "$(GREEN)Building MLX.$(RESET)\n"
-	@make -sC $(MLX_DIR) > /dev/null 2> /dev/null
+	@$(MAKE) -sC $(MLX_DIR) $(MLX_MAKE_VARS) > /dev/null 2> /dev/null
