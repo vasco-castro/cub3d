@@ -1,5 +1,6 @@
 
 -include mks/config.mk
+-include mks/libs.mk
 
 NAME = cub3D
 
