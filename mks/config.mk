@@ -1,18 +1,21 @@
 
-CC			?= cc -Wall -Wextra -Werror
+CC			?= cc
+CFLAGS		:= -Wall -Wextra -Werror
 
 # Directories
 SRCS_DIR	:= srcs/
+OBJS_DIR	:= objs/
 INCS_DIR	:= includes/
 LIBS_DIR	:= libs/
 
-CFLAGS		:= -I./ -I$(INCS_DIR)
+CFLAGS		+= -I./ -I$(INCS_DIR)
 
 # Source files (with directories applied)
-SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main ))
+SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main singletons handlers parsing/parse_map ))
 
 # Object files convertion
 OBJS 		:= $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
+DEPS 		:= $(OBJS:.o=.d)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(dir $@)
@@ -45,4 +48,4 @@ $(MLX): $(MLX_DIR).git
 	@printf "$(GREEN)Building MLX.$(RESET)\n"
 	@make -sC $(MLX_DIR) > /dev/null 2> /dev/null
 
-CFLAGS		+= -I$(LIBFT_DIR) -I$(MLX_DIR)
+CFLAGS		+= -I$(LIBFT_DIR) -I$(LIBFT_DIR)/$(INCS_DIR) -I$(MLX_DIR)

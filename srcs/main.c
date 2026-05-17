@@ -1,28 +1,39 @@
 
-#include "libs/libft/libft.h"
+#include "cub3d.h"
 
-void	clean_exit(void)
+void	destroy_cub3d(int status)
 {
-	// free_map();
+	if (game())
+	{
+		// clean_textures();
+		if (game()->win)
+			mlx_destroy_window(game()->mlx, game()->win);
+		if (game()->mlx)
+		{
+			mlx_destroy_display(game()->mlx);
+			free(game()->mlx);
+		}
+		// free_map();
+		if (game()->map)
+			ft_tabfree(game()->map);
+	}
 	// free_textures();
 	// free_sprites();
 	// free_player();
+	exit(status);
 }
 
-void	parse_map(const char *filename)
+static void	game_init(void)
 {
-	debug("Parsing map from file: %s\n", filename);
-	// open the file
-	// read the file line by line
-	// parse the map data
-	// store the map data in a suitable data structure
-}
-
-void	load_map(void)
-{
+	game()->mlx = mlx_init();
+	game()->win = mlx_new_window(game()->mlx, W_WIDTH, W_HEIGHT, W_MSG);
 	// load textures
 	// load sprites
 	// initialize player position and direction
+	mlx_hook(game()->win, 4, 0, mouse_handler, &game);
+	mlx_hook(game()->win, 2, 1, key_handler, &game);
+	mlx_hook(game()->win, 17, 1, close_window, &game);
+	mlx_loop(game()->mlx);
 }
 
 int	main(int argc, char *argv[])
@@ -33,11 +44,18 @@ int	main(int argc, char *argv[])
 		ft_dprintf(STDERR_FILENO, "Usage: %s <filename>\n", argv[0]);
 		ft_dprintf(STDERR_FILENO, RED "Error\n%s" RESET,
 			"Invalid number of arguments. Expected 1 argument for the map file.\n");
-		return (clean_exit(), 1);
+		return (1);
+	}
+
+	if (ft_has_extension(argv[1], ".cub"))
+	{
+		ft_dprintf(STDERR_FILENO, RED "Error\n%s" RESET,
+			"Invalid file. Expected a .cub file.\n");
+		return (1);
 	}
 
 	parse_map(argv[1]);
-	load_map();
+	game_init();
 
-	return (clean_exit(), 0);
+	return (destroy_cub3d(EXIT_SUCCESS), EXIT_SUCCESS);
 }

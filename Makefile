@@ -11,7 +11,7 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 
 clean:
 	@echo "$(YELLOW)Cleaning objects.$(RESET)"
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(DEPS)
 
 fclean: clean
 	@echo "$(YELLOW)Cleaning binaries.$(RESET)"
