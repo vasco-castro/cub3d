@@ -8,10 +8,12 @@ OBJS_DIR	:= objs/
 INCS_DIR	:= includes/
 LIBS_DIR	:= libs/
 
+-include mks/libs.mk
+
 CFLAGS		+= -I./ -I$(INCS_DIR)
 
 # Source files (with directories applied)
-SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main singletons handlers parsing/parse_map ))
+SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main singletons handlers parsing/parse_map rendering/render ))
 
 # Object files convertion
 OBJS 		:= $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)

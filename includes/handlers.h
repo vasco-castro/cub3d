@@ -1,5 +1,4 @@
 
-
 #ifndef HANDLERS_H
 # define HANDLERS_H
 
@@ -31,8 +30,21 @@
 #  define D_KEY 100
 # endif
 
-int		close_window(void);
-int		key_handler(int keycode);
-int		mouse_handler(int mousecode, int x, int y);
+enum
+{
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
+int	close_window(void);
+int	key_handler(int keycode);
+int	mouse_click_handler(int mousecode, int x, int y);
+int	mouse_move_handler(int x, int y);
+int	loop_hook(void);
 
 #endif /* HANDLERS_H */
