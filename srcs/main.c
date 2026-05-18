@@ -1,6 +1,27 @@
 
 #include "cub3d.h"
 
+t_game	*game(void)
+{
+	static t_game	game;
+
+	return (&game);
+}
+
+t_map	*map(void)
+{
+	static t_map	map;
+
+	return (&map);
+}
+
+t_player	*player(void)
+{
+	static t_player	player;
+
+	return (&player);
+}
+
 void	destroy_cub3d(int status)
 {
 	if (game())
@@ -13,9 +34,8 @@ void	destroy_cub3d(int status)
 			mlx_destroy_display(game()->mlx);
 			free(game()->mlx);
 		}
-		// free_map();
-		if (game()->map)
-			ft_tabfree(game()->map);
+		// if (game()->map)
+			// ft_tabfree(game()->map);
 	}
 	// free_textures();
 	// free_sprites();
@@ -34,8 +54,8 @@ static void	game_init(void)
 	// mlx_hook(game()->win, ON_KEYDOWN, (1L<<0), key_handler, &game);
 	mlx_mouse_hook(game()->win, mouse_click_handler, &game);
 	// mlx_hook(game()->win, ON_MOUSEDOWN, (1L<<2), mouse_click_handler, &game);
-	mlx_hook(game()->win, ON_MOUSEUP, (1L<<2), mouse_click_handler, &game);
-	mlx_hook(game()->win, ON_MOUSEMOVE, (1L<<6), mouse_move_handler, &game);
+	mlx_hook(game()->win, ON_MOUSEUP, (1L<<3), mouse_click_handler, &game);
+	// mlx_hook(game()->win, ON_MOUSEMOVE, (1L<<6), mouse_move_handler, &game);
 	mlx_hook(game()->win, ON_DESTROY, 1, close_window, &game);
 	mlx_loop_hook(game()->mlx, loop_hook, &game);
 	mlx_loop(game()->mlx);

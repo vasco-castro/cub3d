@@ -4,12 +4,24 @@
 void	parse_map(const char *filename)
 {
 	debug("Parsing map from file: %s\n", filename);
-	game()->textures[N_TEXTURE] = "textures/Grass.xpm";
-	game()->textures[S_TEXTURE] = "textures/Hills.xpm";
-	game()->textures[W_TEXTURE] = "textures/Water.xpm";
-	game()->textures[E_TEXTURE] = "textures/Tilled_Dirt.xpm";
-	game()->ceiling = 0x00ff00ff;
-	game()->floor = 0xff00ff00;
+	map()->n_texture = "textures/Grass.xpm";
+	map()->w_texture = "textures/Hills.xpm";
+	map()->s_texture = "textures/Water.xpm";
+	map()->e_texture = "textures/Tilled_Dirt.xpm";
+	map()->ceiling = 0x0074e3fc;
+	map()->floor = 0x004a4a4a;
+
+	map()->map = ft_calloc(7, sizeof(char *));
+	map()->size = (t_point){ 6, 6 };
+	map()->map = ft_tabcpy((char*[]){
+		(char *){"111111"},
+		(char *){"100001"},
+		(char *){"100001"},
+		(char *){"100001"},
+		(char *){"100001"},
+		(char *){"111111"},
+		NULL
+	});
 	// open the file
 	// read the file line by line
 	// parse the textures

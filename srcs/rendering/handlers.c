@@ -6,7 +6,7 @@
 /*   By: vsoares- <vsoares-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 19:29:00 by vsoares-          #+#    #+#             */
-/*   Updated: 2026/05/17 21:59:08 by vsoares-         ###   ########.fr       */
+/*   Updated: 2026/05/18 21:23:56 by vsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,38 @@ int	mouse_click_handler(int mousecode, int x, int y)
 
 int	mouse_move_handler(int x, int y)
 {
-	// debug(YELLOW "Mouse moved to: %d-%d\n" RESET, x, y);
-	mlx_pixel_put(game()->mlx, game()->win, x, y, 0x00cc00cc);
-	// mlx_pixel_put(game()->mlx, game()->win, x, y, 0x00ff0000);
+	debug(YELLOW "Mouse moved to: %d-%d\n" RESET, x, y);
+	mlx_pixel_put(game()->mlx, game()->win, x-3, y, 0x006c11f5);
+
+	mlx_pixel_put(game()->mlx, game()->win, x-2, y-1, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x-2, y, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x-2, y+1, 0x006c11f5);
+
+	mlx_pixel_put(game()->mlx, game()->win, x-1, y-2, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x-1, y-1, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x-1, y, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x-1, y+1, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x-1, y+2, 0x006c11f5);
+
+	mlx_pixel_put(game()->mlx, game()->win, x, y-3, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x, y-2, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x, y-1, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x, y, 0x00aa00aa);
+	mlx_pixel_put(game()->mlx, game()->win, x, y+1, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x, y+2, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x, y+3, 0x006c11f5);
+
+	mlx_pixel_put(game()->mlx, game()->win, x+1, y-2, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x+1, y-1, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x+1, y, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x+1, y+1, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x+1, y+2, 0x006c11f5);
+
+	mlx_pixel_put(game()->mlx, game()->win, x+2, y-1, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x+2, y, 0x006c11f5);
+	mlx_pixel_put(game()->mlx, game()->win, x+2, y+1, 0x006c11f5);
+
+	mlx_pixel_put(game()->mlx, game()->win, x+3, y, 0x006c11f5);
 	return (EXIT_SUCCESS);
 }
 

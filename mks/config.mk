@@ -13,7 +13,7 @@ LIBS_DIR	:= libs/
 CFLAGS		+= -I./ -I$(INCS_DIR)
 
 # Source files (with directories applied)
-SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main singletons handlers parsing/parse_map rendering/render ))
+SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main parsing/parse_map rendering/render rendering/handlers ))
 
 # Object files convertion
 OBJS 		:= $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
