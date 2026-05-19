@@ -8,7 +8,9 @@ t_game	*game()
 	return (&game);
 }
 
-char **map()
+t_map	*map()
 {
-	return (game()->map);
+	static t_map map;
+
+	return (&map);
 }

@@ -4,6 +4,7 @@ CFLAGS		:= -Wall -Wextra -Werror
 
 # Directories
 SRCS_DIR	:= srcs/
+PARSING_DIR	:= $(SRCS_DIR)parsing/
 OBJS_DIR	:= objs/
 INCS_DIR	:= includes/
 LIBS_DIR	:= libs/
@@ -11,7 +12,9 @@ LIBS_DIR	:= libs/
 CFLAGS		+= -I./ -I$(INCS_DIR)
 
 # Source files (with directories applied)
-SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main singletons handlers parsing/parse_map ))
+SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main singletons handlers)) \
+			$(addsuffix .c, $(addprefix $(PARSING_DIR), parse_map read_raw_map_vars parse_error read_map \
+			store_map_body parse_textures parse_colors parse_map_body))
 
 # Object files convertion
 OBJS 		:= $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)

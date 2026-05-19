@@ -58,3 +58,6 @@ dkms.conf
 cub3D
 .vscode
 .idea
+
+#pdf
+en.subject.pdf

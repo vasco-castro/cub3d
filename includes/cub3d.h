@@ -3,6 +3,7 @@
 # define CUB3D_H
 
 # include "libft.h"
+# include "parsing.h"
 # include "mlx.h"
 
 # define FOV 1.047
@@ -21,7 +22,7 @@ typedef struct s_game {
 	uint32_t	ceiling;
 	uint32_t	floor;
 
-	char		**map;
+	t_map		*map;
 
 	void		*mlx;
 	void		*win;
@@ -30,7 +31,6 @@ typedef struct s_game {
 t_game	*game();
 
 // void	load_map(void);
-void	parse_map(const char *filename);
 void	destroy_cub3d(int status);
 
 # include "handlers.h"

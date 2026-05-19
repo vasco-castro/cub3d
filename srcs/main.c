@@ -13,9 +13,8 @@ void	destroy_cub3d(int status)
 			mlx_destroy_display(game()->mlx);
 			free(game()->mlx);
 		}
-		// free_map();
 		if (game()->map)
-			ft_tabfree(game()->map);
+			free_map_data(game()->map);
 	}
 	// free_textures();
 	// free_sprites();
@@ -36,8 +35,22 @@ static void	game_init(void)
 	mlx_loop(game()->mlx);
 }
 
+void	printf_double_pointer(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		printf("%s",args[i]);
+		i++;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
+	t_map *map;
+
 	parse_debug_mode(&argc, argv);
 	if (argc != 2)
 	{
@@ -47,14 +60,17 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 
-	if (ft_has_extension(argv[1], ".cub"))
+	if (!ft_has_extension(argv[1], ".cub"))
 	{
 		ft_dprintf(STDERR_FILENO, RED "Error\n%s" RESET,
 			"Invalid file. Expected a .cub file.\n");
 		return (1);
 	}
 
-	parse_map(argv[1]);
+	map = parse_map(argv[1]);
+	/* if (!map)
+		destroy_cub3d(EXIT_FAILURE); */
+	printf_double_pointer(map->map);
 	game_init();
 
 	return (destroy_cub3d(EXIT_SUCCESS), EXIT_SUCCESS);
