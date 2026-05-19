@@ -6,7 +6,7 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 18:54:08 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/05/19 17:11:26 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/05/19 20:33:50 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_map_vars
 	char			*west_texture_path;
 	unsigned int	floor;
 	unsigned int	ceiling;
-	char			**map;
 }					t_map_vars;
 
 void		free_map_data(t_map *map);
@@ -61,7 +60,7 @@ void		parse_error_on_map(t_map *map);
 char		**read_map(const char *filename);
 t_map		*parse_map(const char *filename);
 void		parse_error(const char *filename);
-t_map_vars	store_map_variables(char **raw_map);
+t_map_vars	store_map_variables(char **raw_map, bool *good);
 char		**store_map_body(char **raw_map);
 bool		parse_textures(t_map_vars map_vars, t_map *map);
 bool		parse_colors(t_map_vars map_vars, t_map *map);

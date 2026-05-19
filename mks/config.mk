@@ -13,7 +13,7 @@ CFLAGS		+= -I./ -I$(INCS_DIR)
 
 # Source files (with directories applied)
 SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main singletons handlers)) \
-			$(addsuffix .c, $(addprefix $(PARSING_DIR), parse_map read_raw_map_vars parse_error read_map \
+			$(addsuffix .c, $(addprefix $(PARSING_DIR), parse_map store_map_variables parse_error read_map \
 			store_map_body parse_textures parse_colors parse_map_body))
 
 # Object files convertion
