@@ -10,22 +10,18 @@ void	parse_map(const char *filename)
 	map()->e_texture = "textures/Tilled_Dirt.xpm";
 	map()->ceiling = 0x0074e3fc;
 	map()->floor = 0x004a4a4a;
-
-	map()->map = ft_calloc(7, sizeof(char *));
-	map()->size = (t_point){ 6, 6 };
-	map()->map = ft_tabcpy((char*[]){
-		(char *){"111111"},
-		(char *){"100001"},
-		(char *){"100001"},
-		(char *){"100001"},
-		(char *){"100001"},
-		(char *){"111111"},
+	map()->map = ft_tabcpy((char *[]){
+		(char *){"11111111"},
+		(char *){"10000001"},
+		(char *){"10100001"},
+		(char *){"10110001"},
+		(char *){"10010001"},
+		(char *){"11110001"},
+		(char *){"10000001"},
+		(char *){"11111111"},
 		NULL
 	});
-	// open the file
-	// read the file line by line
-	// parse the textures
-	// parse the colors of the ceiling and the floor
-	// parse the map data
-	// store the map data in a suitable data structure
+	map()->size = (t_point){8, 8};
+	player()->coord = (t_point){3, 2};
+	player()->angle = (t_point){0, 0};
 }

@@ -34,12 +34,11 @@ void	destroy_cub3d(int status)
 			mlx_destroy_display(game()->mlx);
 			free(game()->mlx);
 		}
-		// if (game()->map)
-			// ft_tabfree(game()->map);
+		if (map()->map)
+			ft_tabfree(map()->map);
 	}
 	// free_textures();
 	// free_sprites();
-	// free_player();
 	exit(status);
 }
 
@@ -47,9 +46,6 @@ static void	game_init(void)
 {
 	game()->mlx = mlx_init();
 	game()->win = mlx_new_window(game()->mlx, W_WIDTH, W_HEIGHT, W_MSG);
-	// load textures
-	// load sprites
-	// initialize player position and direction
 	mlx_key_hook(game()->win, key_handler, &game);
 	// mlx_hook(game()->win, ON_KEYDOWN, (1L<<0), key_handler, &game);
 	mlx_mouse_hook(game()->win, mouse_click_handler, &game);
@@ -71,16 +67,14 @@ int	main(int argc, char *argv[])
 			"Invalid number of arguments. Expected 1 argument for the map file.\n");
 		return (1);
 	}
-
-	if (ft_has_extension(argv[1], ".cub"))
+	if (!ft_has_extension(argv[1], ".cub"))
 	{
 		ft_dprintf(STDERR_FILENO, RED "Error\n%s" RESET,
 			"Invalid file. Expected a .cub file.\n");
 		return (1);
 	}
-
 	parse_map(argv[1]);
+	ft_printfile("banner.txt");
 	game_init();
-
 	return (destroy_cub3d(EXIT_SUCCESS), EXIT_SUCCESS);
 }

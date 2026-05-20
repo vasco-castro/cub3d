@@ -1,24 +1,33 @@
 
-CC			?= cc
-CFLAGS		:= -Wall -Wextra -Werror
-
 # Directories
 SRCS_DIR	:= srcs/
 OBJS_DIR	:= objs/
 INCS_DIR	:= includes/
 LIBS_DIR	:= libs/
 
+# Compiler and flags
+CC			?= cc
+CFLAGS		:= -Wall -Wextra -Werror -I./ -I$(INCS_DIR)
+LDFLAGS		:= -lm
+
+# Include library rules, flags and variables
 -include mks/libs.mk
 
-CFLAGS		+= -I./ -I$(INCS_DIR)
-
 # Source files (with directories applied)
-SRCS		:= $(addsuffix .c, $(addprefix $(SRCS_DIR), main parsing/parse_map rendering/render rendering/handlers ))
+SRCS		:= $(addsuffix .c, \
+	$(addprefix $(SRCS_DIR), main \
+		$(addprefix parsing/, parse_map) \
+		$(addprefix rendering/, render put_pixels images) \
+		$(addprefix events/, handlers key_handlers mouse_handlers) \
+		$(addprefix utils/, utils) \
+	) \
+)
 
-# Object files convertion
+# Object files and dependency files
 OBJS 		:= $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 DEPS 		:= $(OBJS:.o=.d)
 
+# Rules for compiling source files into object files and generating dependency files
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@

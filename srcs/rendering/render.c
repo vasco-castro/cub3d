@@ -3,9 +3,11 @@
 
 static void	render_bg(void)
 {
-	size_t x, y;
+	int	x;
+	int	y;
 
 	return ;
+	debug("Rendering background...\n");
 	y = 0;
 	while (W_HEIGHT / 2 >= y++)
 	{
@@ -23,31 +25,30 @@ static void	render_bg(void)
 
 static void	render_walls(void)
 {
-
+	debug("Rendering walls...\n");
 }
 
 static void	render_minimap(void)
 {
-	int	x;
-	int	y;
-	// mlx_pixel_put(game()->mlx, game()->win, 0, 0, 0x00cc0000);
-	// mlx_pixel_put(game()->mlx, game()->win, 1, 0, 0x00cc0000);
-	// mlx_pixel_put(game()->mlx, game()->win, 0, 1, 0x00cc0000);
-	// mlx_pixel_put(game()->mlx, game()->win, 1, 1, 0x00cc0000);
+	int	row;
+	int	col;
 
-	x = 0;
-	while (x < map()->size.x || map()->map[x])
+	debug("Rendering minimap...\n");
+	row = 0;
+	while (row < map()->size.x && map()->map[row])
 	{
-		y = 0;
-		while (y < map()->size.y || map()->map[x][y])
+		col = 0;
+		while (col < map()->size.y && map()->map[row][col])
 		{
-			if (map()->map[x][y] == '1')
-				mlx_pixel_put(game()->mlx, game()->win, x, y, 0x00cc0000);
-			else if (map()->map[x][y] == '0')
-				mlx_pixel_put(game()->mlx, game()->win, x, y, 0x0000cc00);
-			y++;
+			if (map()->map[row][col] == '1')
+				put_square(col * MINIMAP_SCALE, row * MINIMAP_SCALE, MINIMAP_SCALE, 0x00bf5600);
+			else
+				put_square(col * MINIMAP_SCALE, row * MINIMAP_SCALE, MINIMAP_SCALE, 0x00fcba03);
+			if (player()->coord.x == col && player()->coord.y == row)
+				put_star(col * MINIMAP_SCALE, row * MINIMAP_SCALE, MINIMAP_SCALE, 0x006300bf);
+			col++;
 		}
-		x++;
+		row++;
 	}
 }
 
@@ -55,5 +56,6 @@ void	render(void)
 {
 	render_bg();
 	render_walls();
-	render_minimap();
+	if (MINIMAP)
+		render_minimap();
 }

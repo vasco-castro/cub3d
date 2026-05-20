@@ -7,7 +7,8 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	@echo "$(GREEN)Building $(NAME).$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBFT_FLAGS) $(MLX) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBFT) $(MLX) $(LDFLAGS) -o $(NAME)
+	@printf "$(PURPLE)%s$(RESET)\n" "$$(cat banner.txt)"
 
 clean:
 	@echo "$(YELLOW)Cleaning objects.$(RESET)"
@@ -22,7 +23,7 @@ fclean: clean
 re: fclean all
 
 .DEFAULT_GOAL := all
-.PHONY: all clean fclean re t
+.PHONY: all clean fclean re
 
 BLACK	= \e[1;30m
 RED		= \e[1;31m

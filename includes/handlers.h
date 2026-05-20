@@ -4,6 +4,7 @@
 
 # define CLOSE_KEY 17
 
+// TODO: Add mouse buttons and movement keys
 # ifdef __APPLE__
 #  define ESCAPE_KEY 53
 
@@ -40,6 +41,7 @@ enum
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
 };
+// TODO: Add masks for key and mouse events
 
 int	close_window(void);
 int	key_handler(int keycode);
