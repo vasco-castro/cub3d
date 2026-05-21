@@ -6,24 +6,37 @@
 /*   By: biphuyal <biphuyal@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 18:54:12 by biphuyal          #+#    #+#             */
-/*   Updated: 2026/05/19 20:53:58 by biphuyal         ###   ########.fr       */
+/*   Updated: 2026/05/21 17:33:05 by biphuyal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static void clear_parse_allocation(t_map *result, char **map_body, t_map_vars map_vars)
+// static void clear_parse_allocation(t_map *result, char **map_body, t_map_vars map_vars)
+// {
+// 	(free(result), ft_tabfree(map_body), free_map_vars(NULL, &map_vars));
+// }
+/* 
+void	print_map_vars(t_map_vars map_vars)
 {
-	(free(result), ft_tabfree(map_body), free_map_vars(NULL, &map_vars));
-}
+	printf("NO: %s\n", map_vars.north_texture_path
+		? map_vars.north_texture_path : "(null)");
+	printf("SO: %s\n", map_vars.south_texture_path
+		? map_vars.south_texture_path : "(null)");
+	printf("EA: %s\n", map_vars.east_texture_path
+		? map_vars.east_texture_path : "(null)");
+	printf("WE: %s\n", map_vars.west_texture_path
+		? map_vars.west_texture_path : "(null)");
+	printf("F: %s\n", map_vars.floor);
+	printf("C: %s\n", map_vars.ceiling);
+} */
 
 t_map	*parse_map(const char *filename)
 {
 	t_map		*result;
 	char		**raw_map;
-	char		**map_body;
+	// char		**map_body;
 	t_map_vars	map_vars;
-	bool		*good;
 
 	result = ft_calloc(1, sizeof(t_map));
 	if (!result)
@@ -31,9 +44,9 @@ t_map	*parse_map(const char *filename)
 	raw_map = read_map(filename);
 	if (!raw_map)
 		return (free(result), NULL);
-	map_vars = store_map_variables(raw_map, &good); // these should be independent of raw map destroyment
-	if (!good)
-		return (free(result), free_map_vars(NULL, &map_vars), NULL); // (Need to free raw_map if this and map_body fails) <--------DON'T FORGET IT!!!!!!
+	map_vars = store_map_variables(raw_map); // these should be independent of raw map destroyment
+
+	// print_map_vars(map_vars);
 	// map_body = store_map_body(raw_map); // these should be independent of raw map destroyment 
 	// ft_tabfree(raw_map);
 	// if (!parse_textures(map_vars, result) || !parse_colors(map_vars, result))
